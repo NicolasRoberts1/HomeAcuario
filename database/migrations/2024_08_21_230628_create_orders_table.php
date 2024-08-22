@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cliente', 75);
             $table->string('direccion');
             $table->string('pago', 15); //Estado Efectivo/transferencia
-            $table->unsignedBigInteger('id_producto');
+
             $table->integer('cantidad');
             $table->float('total', 12, 2);
             $table->float('pre_entrega', 12, 2);
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('id_producto')->references('id')->on('products');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
