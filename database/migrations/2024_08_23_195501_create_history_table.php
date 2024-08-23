@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productsorders', function (Blueprint $table) {
+        Schema::create('history', function (Blueprint $table) {
             $table->unsignedBigInteger('id_orden');
             $table->unsignedBigInteger('id_producto');
 
-            $table->integer('cantidad');
             $table->unsignedBigInteger('user_id');
+            $table->integer('cantidad');
+
+            $table->timestamps();
 
             //claves primarias compuestas
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productsorders');
+        Schema::dropIfExists('history');
     }
 };
