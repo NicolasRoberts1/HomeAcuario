@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('pago', 15); //Estado Efectivo/transferencia
 
-            $table->integer('cantidad');
             $table->float('total', 12, 2);
             $table->float('pre_entrega', 12, 2);
             $table->string('observacion', 200);
