@@ -30,11 +30,16 @@
 
 
                     @auth
-                        @foreach( $orders as $order )
-                        <div class="clientes">
-                            <p>{{$orders->cliente}}</p>
+                        <a href="{{route('orders.create')}}" class="" id="btnAdd">+ Añadir</a>
+
+                        <div class="contOrders">
+                            @foreach( $orders as $order )
+                                <div class="clientes">
+                                    <p>{{$orders->cliente}}</p>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+
                     @endauth
                 </div>
         </div>

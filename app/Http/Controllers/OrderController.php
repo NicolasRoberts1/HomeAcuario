@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Order;
 use App\Models\ProductOrder;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -27,5 +28,41 @@ class OrderController extends Controller
             'notify_order_updated' => $notify_order_updated,
             'notify_order_deleted' => $notify_order_deleted
         ]);
+    }
+
+    public function create(){
+        //Recupero los productos de la tabla, para mostrarlos y asi poder elegirlos
+        $products= Product::orderBy('cantidad', 'ASC');
+
+        return view('orders/create', [
+            'products' => $products
+        ]);
+    }
+
+    public function store(Request $request){
+        $user_id = auth()->user()->id;
+        $order = new Order();
+        $order->cliente = $request->input('cliente');
+        $order->direccion = $request->input('direccion');
+        $order->pago = $request->input('metodo_pago');
+        $order->pre_entrega = $request->input('entrega');
+        $order->observacion = $request->input('observaciones');
+        $order->user_id = $user_id;
+        $order->save();
+
+        $products = $request->input('products', []);
+
+        foreach ($products as $producto_id => $cantidad) {
+            $order->products()->attach($producto_id, [
+                'cantidad' => $cantidad,
+                'user_id' => $user_id
+            ]);
+        }
+
+        //Registro el evento que sucedio: agrego una orden nueva
+
+        session()->flash('notify_order_created', true);
+
+        return redirect()->route('orders');
     }
 }

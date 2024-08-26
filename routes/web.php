@@ -28,9 +28,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //Ruta que me redirige a la vista orders (pagina principal)
     Route::get('/orders', [
         App\Http\Controllers\OrderController::class, 'index'
     ])->name('orders');
+
+    //Ruta que redirige a la vista para crear un nuevo pedido
+    Route::get('/orders/create', [
+        App\Http\Controllers\OrderController::class, 'create'
+    ])->name('orders.create');
+
+    //Ruta que almacena el formulario del pedido
+    Route::put('/orders', [
+        App\Http\Controllers\OrderController::class, 'store'
+    ])->name('orders.store');
 });
 
 require __DIR__.'/auth.php';
