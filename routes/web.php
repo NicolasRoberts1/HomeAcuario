@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+    //=====================ORDERS=======================
+
     //Ruta que me redirige a la vista orders (pagina principal)
     Route::get('/orders', [
         App\Http\Controllers\OrderController::class, 'index'
@@ -42,6 +45,25 @@ Route::middleware('auth')->group(function () {
     Route::put('/orders', [
         App\Http\Controllers\OrderController::class, 'store'
     ])->name('orders.store');
+
+
+    //==================PRODUCTS======================
+    //Ruta que redirige a la vista products
+    Route::get('/products', [
+        App\Http\Controllers\ProductController::class, 'index'
+    ])->name('products');
+
+    //Ruta que redirige a la vista create para crear un producto
+    Route::get('/products/create', [
+        App\Http\Controllers\ProductController::class, 'create'
+    ])->name('products.create');
+
+
+    //====================HISTORY======================
+    //Ruta que redirige a la vista history (donde se mostrara el historial de los pedidos realizados y su estado)
+    Route::get('/history', [
+        App\Http\Controllers\HistoryController::class, 'index'
+    ])->name('history');
 });
 
 require __DIR__.'/auth.php';

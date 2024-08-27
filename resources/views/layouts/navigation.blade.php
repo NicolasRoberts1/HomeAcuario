@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
                         {{ __('Pedidos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                        {{ __('Productos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
+                        {{ __('Historial') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -70,7 +76,14 @@
             <x-responsive-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
                 {{ __('Pedidos') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('products')" :active="request()->routeIs('products')">
+                {{ __('Productos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('history')" :active="request()->routeIs('history')">
+                {{ __('Historial') }}
+            </x-responsive-nav-link>
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
