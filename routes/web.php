@@ -57,6 +57,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/create', [
         App\Http\Controllers\ProductController::class, 'create'
     ])->name('products.create');
+    //Almacena los datos ingresados en el formulariod e la vista create
+    Route::post('/products', [
+        App\Http\Controllers\ProductController::class, 'store'
+    ])->name('products.store');
+    //Editar producto
+    Route::get('/products/edit/{product}', [
+        App\Http\Controllers\ProductController::class, 'edit'
+    ])->name('products.edit');
+    //Guardado de datos de la edicion
+    Route::put('/products/{product}', [
+        App\Http\Controllers\ProductController::class, 'update'
+    ])->name('products.update');
+    //Eliminar un producto
+    Route::delete('/products/{product}', [
+        App\Http\Controllers\ProductController::class, 'destroy'
+    ])->name('products.destroy');
 
 
     //====================HISTORY======================
