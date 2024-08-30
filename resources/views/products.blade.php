@@ -6,9 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"><!--class="row"-->
-            <!--col-8 offset-2-->
-                <div class="max-w-5xl mx-auto sm:px-5 lg:px-5 p-5 flex flex-col">
+        <div class=" mx-auto sm:px-6 lg:px-8"><!--class="row"-->
                     @auth
                         @if($notify_product_created == true)
                             <div class="alert bg-green-300 mb-8 p-4 border-2 border-solid border-green-500 rounded-lg" role="alert">
@@ -28,57 +26,70 @@
                             </div>
                         @endif
 
-                        <a href="{{route('products.create')}}" class="" id="btnNuevoProducto">+ Nuevo producto</a>
+                        <div class="px-4 py-4 flex justify-center mb-7">
+                            <a href="{{route('products.create')}}" class="button cursor-pointer bg-indigo-600 text-white rounded-lg px-4 py-3 text-center font-weight-500 hover:bg-indigo-800" id="btnNuevoProducto">+ Nuevo producto</a>
+                        </div>
 
 
-                        <table class="">
-                            <thead class="">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-300">
+                              <thead class="bg-gray-200">
                                 <tr>
-                                    <th>ID producto</th>
-                                    <th>Imagen</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio unitario</th>
-                                    <th>Estado</th>
-                                    <th>Fecha Agregado</th>
-                                    <th>Fecha modificado</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">ID producto</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Imagen</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Descripción</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cantidad</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio unitario</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha Agregado</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha modificado</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Acción</th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( $products as $product )
-                                <tr class="">
-                                    <td>{{$product->id}}</td>
-                                    <td>{{$product->imagen}}</td>
-                                    <td>{{$product->nombre}}</td>
-                                    <td>{{$product->descripcion}}</td>
-                                    <td>{{$product->cantidad}}</td>
-                                    <td>{{$product->precio}}</td>
-                                    <td>{{$product->estado}}</td>
-                                    <td>{{$product->created_at}}</td>
-                                    <td>{{$product->updated_at}}</td>
-                                    <td>
-                                        <a href="{{ route('products.edit', ['product' => $product->id]) }}">EDITAR</a>
-                                        <button type="button" onclick="openModal('{{ $product->id }}')">Eliminar</button>
-                                    </td>
-                                </tr>
+                              </thead>
+                                   <tbody class="border border-gray-400">
+                                       @foreach( $products as $product )
+                                       <tr class="">
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->id}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->imagen}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->nombre}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center break-words">{{$product->descripcion}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->cantidad}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->precio}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->estado}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->created_at}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->updated_at}}</td>
+                                           <td class="flex py-2 justify-between py-2 px-4 border-b text-sm text-gray-700 text-center">
+                                               <a href="{{ route('products.edit', ['product' => $product->id]) }}"><img src="{{ asset('images/edit-icon.ico') }}" alt="Editar" style="width:28px"></a>
+                                               <button type="button" onclick="openModal('{{ $product->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
+                                           </td>
+                                       </tr>
 
-                                <!-- Modal -->
-                                <div id="deleteModal{{ $product->id }}" class="modal">
-                                    <div class="modal-content">
-                                        <span class="close" onclick="closeModal('{{ $product->id }}')">&times;</span>
-                                        <p>¿Estás seguro de que deseas eliminar este producto?</p>
-                                        <form id="deleteForm{{ $product->id }}" action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit">Eliminar</button>
-                                            <button type="button" onclick="closeModal('{{ $product->id }}')">Cancelar</button>
-                                        </form>
+                                       <!-- Modal -->
+                                       <div id="deleteModal{{ $product->id }}" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                        <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                                            <span class="close text-gray-500 hover:text-gray-700 text-xl cursor-pointer float-right" onclick="closeModal('{{ $product->id }}')">&times;</span>
+                                            <p class="text-lg font-semibold mb-4">¿Estás seguro de que deseas eliminar este producto?</p>
+                                            <form id="deleteForm{{ $product->id }}" action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="flex justify-end space-x-3">
+                                                    <button type="submit" class="bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600">
+                                                        Eliminar
+                                                    </button>
+                                                    <button type="button" class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded hover:bg-gray-300" onclick="closeModal('{{ $product->id }}')">
+                                                        Cancelar
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-                            </tbody>
-                        </table>
+
+                                   @endforeach
+                                   </tbody>
+                            </table>
+                        </div>
+
                     @endauth
                 </div>
         </div>
