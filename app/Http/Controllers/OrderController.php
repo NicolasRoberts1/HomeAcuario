@@ -10,13 +10,14 @@ use Illuminate\View\View;
 use App\Models\Order;
 use App\Models\ProductOrder;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
     //Metodo index, retorna la pagina principal con las ordenes cargadas
     public function index()
     {
-        $orders= Order::orderBy('created_at', 'asc');
+        $orders= Order::all();
 
         $notify_order_created = session()->get('notify_order_created', false);
         $notify_order_updated = session()->get('notify_order_updated', false); //En caso de poder modificarse una orden
@@ -32,15 +33,18 @@ class OrderController extends Controller
 
     public function create(){
         //Recupero los productos de la tabla, para mostrarlos y asi poder elegirlos
-        $products= Product::orderBy('cantidad', 'ASC');
+        $products= Product::all();
 
         return view('orders/create', [
             'products' => $products
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $user_id = auth()->user()->id;
+
+        // Crear nueva orden pero no guardarla aún
         $order = new Order();
         $order->cliente = $request->input('cliente');
         $order->direccion = $request->input('direccion');
@@ -48,21 +52,47 @@ class OrderController extends Controller
         $order->pre_entrega = $request->input('entrega');
         $order->observacion = $request->input('observaciones');
         $order->user_id = $user_id;
-        $order->save();
+        $order->fecha = Carbon::now();
+        $order->estado = "Pendiente";
 
+        // Calcular el total antes de guardar
         $products = $request->input('products', []);
+        $total = 0;
 
         foreach ($products as $producto_id => $cantidad) {
-            $order->products()->attach($producto_id, [
-                'cantidad' => $cantidad,
-                'user_id' => $user_id
-            ]);
+            if ($cantidad > 0) {
+                $product = Product::find($producto_id);
+                $subtotal = $product->precio * $cantidad;
+                $total += $subtotal;
+            }
         }
 
-        //Registro el evento que sucedio: agrego una orden nueva
+        // Asignar el total calculado antes de guardar
+        $order->total = $total;
+
+        // Ahora guardamos la orden con el total
+        $order->save();
+
+        // Agregar productos a la tabla intermedia
+        foreach ($products as $producto_id => $cantidad) {
+            if ($cantidad > 0) {
+                $order->product()->attach($producto_id, [
+                    'cantidad' => $cantidad,
+                    'user_id' => $user_id
+                ]);
+            }
+        }
 
         session()->flash('notify_order_created', true);
+        return redirect()->route('orders');
+    }
+
+    public function destroy(Order $order){
+        $order->delete();
+
+        session()->flash('notify_order_deleted', true);
 
         return redirect()->route('orders');
     }
+
 }

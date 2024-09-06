@@ -30,7 +30,6 @@
                             <a href="{{route('products.create')}}" class="button cursor-pointer bg-indigo-600 text-white rounded-lg px-4 py-3 text-center font-weight-500 hover:bg-indigo-800" id="btnNuevoProducto">+ Nuevo producto</a>
                         </div>
 
-
                         <div class="overflow-x-auto">
                             <table class="min-w-full bg-white border border-gray-300">
                               <thead class="bg-gray-200">
@@ -40,7 +39,7 @@
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Descripción</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cantidad</th>
-                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio unitario</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio unitario ($)</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha Agregado</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha modificado</th>

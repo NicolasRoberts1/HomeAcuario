@@ -42,9 +42,14 @@ Route::middleware('auth')->group(function () {
     ])->name('orders.create');
 
     //Ruta que almacena el formulario del pedido
-    Route::put('/orders', [
+    Route::post('/orders', [
         App\Http\Controllers\OrderController::class, 'store'
     ])->name('orders.store');
+
+    //Ruta para eliminar un pedido
+    Route::delete('/orders/{order}', [
+        App\Http\Controllers\OrderController::class, 'destroy'
+    ])->name('orders.destroy');
 
 
     //==================PRODUCTS======================
