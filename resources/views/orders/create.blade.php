@@ -1,40 +1,55 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Crear Pedido') }}
-        </h2>
-    </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- <div class="max-w-5xl mx-auto sm:px-5 lg:px-5 p-5 flex flex-col"> --}}
                     <form action="{{ route('orders.store') }}" method="POST">
                         @csrf
-                        <div class="flex">
-                            <div>
+                        <div class="flex flex-col md:flex-row justify-center gap-16">
+                            <div class="flex flex-col bg-white w-5/12 py-10 px-10 rounded-xl font-sans">
+
                             <!-- Formulario de pedido -->
-                            <label>Nombre y Apellido del Cliente</label>
-                            <input type="text" name="cliente" required>
 
-                            <label>Dirección</label>
-                            <input type="text" name="direccion">
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+                                {{ __('Crear Pedido') }}
+                            </h2>
 
-                            <label>Método de Pago</label>
-                            <input type="radio" name="metodo_pago" value="efectivo" required> Efectivo
-                            <input type="radio" name="metodo_pago" value="transferencia" required> Transferencia
+                            <hr class="mt-5 mb-5">
 
-                            <label>Entrega ($)</label>
-                            <input type="number" name="entrega">
+                            <label class="mt-5 font-medium text-lg text-gray-600">Nombre y Apellido del Cliente</label>
+                            <input type="text" name="cliente" required class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
 
-                            <label>Observaciones</label>
-                            <textarea name="observaciones"></textarea>
+                            <label class="mt-5 font-medium text-lg text-gray-600">Dirección</label>
+                            <input type="text" name="direccion" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
+
+                            <label class="mt-5 font-medium text-lg text-gray-600">Método de Pago</label>
+                            <div class="flex items-center justify-around font-medium text-lg text-gray-600 mt-2">
+                                <div>
+                                    <input type="radio" name="metodo_pago" value="efectivo" required> Efectivo
+                                </div>
+                                <div>
+                                    <input type="radio" name="metodo_pago" value="transferencia" required> Transferencia
+                                </div>
+                            </div>
+
+                            <label class="mt-5 font-medium text-lg text-gray-600">Entrega ($)</label>
+                            <input type="number" name="entrega" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
+
+                            <label class="mt-5 font-medium text-lg text-gray-600">Observaciones</label>
+                            <textarea name="observaciones" id="observacion" cols="30" rows="5" maxlength="150" oninput="updateCounter()" placeholder="Observaciones del pedido..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2 resize-none"></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span>/150 caracteres
+                            </div> {{--Contador de caracteres del textarea--}}
                         </div>
 
-                        <div>
+                        <div class="flex flex-col flex-wrap w-1/2">
                             <!-- Selección de productos -->
-                            <label>Seleccionar productos</label>
-                            <input type="text" id="searchInput" placeholder="Buscar...">
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full bg-white border border-gray-300">
+                            <div class="flex flex-col  mb-8">
+                                <label class="mt-5 font-medium text-lg text-gray-600">Seleccionar productos</label>
+                                <input type="text" id="searchInput" placeholder="Buscar..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
+                            </div>
+
+                            <div class="overflow-x-auto w-full">
+                                <table class="min-w-full bg-white border border-gray-300 min-w-full table-auto">
                                   <thead class="bg-gray-200">
                                     <tr>
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">ID producto</th>
@@ -74,8 +89,9 @@
                         </div>
 
                         </div>
-
-                        <button type="submit">Agregar Pedido</button>
+                        <div class="flex justify-center">
+                            <button type="submit" class="font-medium text-lg text-white button cursor-pointer bg-indigo-600 rounded-lg px-3 py-2 text-center hover:bg-indigo-800 ml-5 mt-5">Agregar Pedido</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -138,5 +154,13 @@
         }
     }
 
+
+        function updateCounter() {
+            const textarea = document.getElementById('observacion');
+            const charCount = document.getElementById('charCount');
+            charCount.textContent = textarea.value.length;
+        }
+        document.getElementById('observacion').addEventListener('input', updateCounter);
+        document.addEventListener('DOMContentLoaded', updateCounter);
     </script>
 </x-app-layout>

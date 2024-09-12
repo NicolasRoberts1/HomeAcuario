@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Pedidos') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="py-12">
         <div class="mx-auto sm:px-6 lg:px-8">
@@ -57,10 +57,11 @@
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->total}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->pre_entrega}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->observacion}}</td>
-                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->estado}}</td>
-                                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"></td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center text-orange-400">{{$order->estado}}</td>
+                                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="#" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
                                            <td class="flex py-2 justify-between py-2 px-4 border-b text-sm text-gray-700 text-center">
                                                <button type="button" onclick="openModal('{{ $order->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
+                                               <a href="#" style="width: 20px;"><img src="{{asset('images/check-icon.ico')}}" alt="Listo"></a>
                                            </td>
                                        </tr>
 
