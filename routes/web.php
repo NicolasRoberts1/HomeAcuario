@@ -51,6 +51,10 @@ Route::middleware('auth')->group(function () {
         App\Http\Controllers\OrderController::class, 'destroy'
     ])->name('orders.destroy');
 
+    Route::get('/orders/extendOrder/{order}', [
+        App\Http\Controllers\OrderController::class, 'extendOrder'
+    ])->name('orders.extendOrder');
+
 
     //==================PRODUCTS======================
     //Ruta que redirige a la vista products

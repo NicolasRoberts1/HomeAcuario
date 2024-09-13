@@ -58,7 +58,7 @@
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->pre_entrega}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->observacion}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center text-orange-400">{{$order->estado}}</td>
-                                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="#" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
+                                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="{{route('orders.extendOrder', ['order'=>$order->id])}}" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
                                            <td class="flex py-2 justify-between py-2 px-4 border-b text-sm text-gray-700 text-center">
                                                <button type="button" onclick="openModal('{{ $order->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
                                                <a href="#" style="width: 20px;"><img src="{{asset('images/check-icon.ico')}}" alt="Listo"></a>

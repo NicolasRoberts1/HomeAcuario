@@ -95,4 +95,14 @@ class OrderController extends Controller
         return redirect()->route('orders');
     }
 
+    public function extendOrder(Order $order,Request $request){
+
+        if($order->user_id != auth()->user()->id){
+            abort(403);
+        }
+
+        $products = $order->product;
+
+        return view('orders.extendOrder', compact('order', 'products'));
+    }
 }
