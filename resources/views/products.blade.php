@@ -50,7 +50,13 @@
                                        @foreach( $products as $product )
                                        <tr class="">
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->id}}</td>
-                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->imagen}}</td>
+                                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">
+                                            @if($product->imagen)
+                                                <img src="{{ asset('storage/' . $product->imagen) }}" alt="Imagen de {{ $product->nombre }}" class="w-16 h-16 object-cover">
+                                            @else
+                                                No image
+                                            @endif
+                                        </td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->nombre}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center break-words">{{$product->descripcion}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->cantidad}}</td>

@@ -35,20 +35,31 @@ class ProductController extends Controller
 
     public function store(Request $request){
 
-        //validacion de campos
-        $imagen= "null";  //CUANDO SE PUEDA PONER IMAGENES SE CORRIGE
-        $nombre= $request->input('nombre');
-        $descripcion= $request->input('descripcion');
-        $cantidad= $request->input('cantidad');
-        $precio= $request->input('precio');
+        // Validar los datos incluyendo el archivo de imagen
+        $request->validate([
+            'nombre' => 'required|max:75',
+            'descripcion' => 'required|max:150',
+            'cantidad' => 'required|integer|min:1',
+            'precio' => 'required|numeric|min:0',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de la imagen
+        ]);
 
+        // Procesar la imagen si existe
+        $imagen = null;
+        if ($request->hasFile('imagen')) {
+            // Guardar la imagen en la carpeta 'public/images' y obtener el nombre del archivo
+            $imagen = $request->file('imagen')->store('images', 'public');
+        }
+
+        // Crear el nuevo producto
         $new_product = new Product();
-        $new_product->imagen= $imagen;
-        $new_product->nombre= $nombre;
-        $new_product->descripcion= $descripcion;
-        $new_product->cantidad= $cantidad;
-        $new_product->precio= $precio;
-        $new_product->user_id= auth()->user()->id;
+        $new_product->imagen = $imagen; // Guardar la ruta de la imagen
+        $new_product->nombre = $request->input('nombre');
+        $new_product->descripcion = $request->input('descripcion');
+        $new_product->cantidad = $request->input('cantidad');
+        $new_product->precio = $request->input('precio');
+        $new_product->user_id = auth()->user()->id;
+
         if($new_product->cantidad>0){
             $new_product->estado= "En Stock";
         }else{
@@ -71,6 +82,23 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request){
 
+         // Validar los datos incluyendo el archivo de imagen
+         $request->validate([
+            'nombre' => 'required|max:75',
+            'descripcion' => 'required|max:150',
+            'cantidad' => 'required|integer|min:1',
+            'precio' => 'required|numeric|min:0',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de la imagen
+        ]);
+
+        // Procesar la imagen si existe
+        $imagen = null;
+        if ($request->hasFile('imagen')) {
+            // Guardar la imagen en la carpeta 'public/images' y obtener el nombre del archivo
+            $imagen = $request->file('imagen')->store('images', 'public');
+        }
+
+        $product->imagen = $imagen;
         $product->nombre = $request->input('nombre');
         $product-> descripcion= $request->input('descripcion');
         $product->cantidad = $request->input('cantidad');

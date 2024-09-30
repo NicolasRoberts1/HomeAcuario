@@ -41,10 +41,11 @@
             </h2>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-300">
+                <table class="min-w-full bg-white border border-gray-300 min-w-full table-auto">
                   <thead class="bg-gray-200">
                     <tr>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">ID Producto</th>
+                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Imagen</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio Unitario ($)</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cantidad</th>
@@ -54,6 +55,13 @@
                       @foreach($products as $product)
                       <tr>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->id}}</td>
+                          <td class="py-2 px-4 border-b text-sm text-gray-700 text-center items-center">
+                            @if($product->imagen)
+                                <img src="{{ asset('storage/' . $product->imagen) }}" alt="Imagen de {{ $product->nombre }}" class="w-16 h-16 object-cover">
+                            @else
+                                No image
+                            @endif
+                            </td>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->nombre}}</td>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->precio}}</td>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->pivot->cantidad}}</td>

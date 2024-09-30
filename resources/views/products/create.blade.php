@@ -2,15 +2,15 @@
     <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="max-w-5xl mx-auto sm:px-5 lg:px-5 p-5 flex flex-col items-center">
-                    <form action="{{route('products.store')}}" method="POST" class="bg-white flex flex-col w-2/3 py-10 px-10 rounded-xl font-sans">
+                    <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" class="bg-white flex flex-col w-2/3 py-10 px-10 rounded-xl font-sans">
                         @csrf
 
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
                             {{ __('Nuevo producto') }}
                         </h2>
                         <hr class="mt-5 mb-5">
-                        {{-- <label for="imagen">Imagen:</label>
-                        <input type="file" name="imagen"> --}}
+                        <label for="imagen" class="w-1/2 font-medium text-lg text-gray-600">Imagen:</label>
+                        <input type="file" name="imagen" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
                         <label for="nombre" class="w-1/2 font-medium text-lg text-gray-600">Nombre:</label>
                         <input type="text" name="nombre" placeholder="Nombre del producto..." max="75" required class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
                         <label for="descripcion" class="mt-5 font-medium text-lg text-gray-600">Descripción:</label>
