@@ -12,20 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('history', function (Blueprint $table) {
+            $table->id('id_registro');
             $table->unsignedBigInteger('id_orden');
-            $table->unsignedBigInteger('id_producto');
-
+            $table->datetime('fecha');
+            $table->string('cliente');
+            $table->string('direccion');
+            $table->float('total', 12, 2);
+            $table->string('estado');
             $table->unsignedBigInteger('user_id');
-            $table->integer('cantidad');
-
-            $table->timestamps();
-
-            //claves primarias compuestas
-
-            $table->primary(['id_orden', 'id_producto']);
 
             // Definir las claves foráneas
-            $table->foreign('id_producto')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_orden')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

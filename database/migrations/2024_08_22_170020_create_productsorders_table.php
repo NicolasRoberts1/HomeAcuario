@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->unsignedBigInteger('user_id');
 
+            $table->timestamps();
+
             //claves primarias compuestas
 
             $table->primary(['id_orden', 'id_producto']);

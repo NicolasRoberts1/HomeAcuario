@@ -61,7 +61,18 @@
                                            <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="{{route('orders.extendOrder', ['order'=>$order->id])}}" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
                                            <td class="flex py-2 justify-between py-2 px-4 border-b text-sm text-gray-700 text-center">
                                                <button type="button" onclick="openModal('{{ $order->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
-                                               <a href="#" style="width: 20px;"><img src="{{asset('images/check-icon.ico')}}" alt="Listo"></a>
+                                               <form action="{{route('orders.transfHistory', ['order'=>$order->id])}}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <input type="hidden" name="id_orden" value="{{$order->id}}">
+                                                    <input type="hidden" name="fecha" value="{{$order->fecha}}">
+                                                    <input type="hidden" name="cliente" value="{{$order->cliente}}">
+                                                    <input type="hidden" name="direccion" value="{{$order->direccion}}">
+                                                    <input type="hidden" name="total" value="{{$order->total}}">
+                                                    <input type="hidden" name="estado" value="{{$order->estado}}">
+                                                    <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                                        <img src="{{asset('images/check-icon.ico')}}" alt="Listo" style="width: 20px;">
+                                                    </button>
+                                            </form>
                                            </td>
                                        </tr>
 

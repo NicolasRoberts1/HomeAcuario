@@ -38,4 +38,8 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function history(){
+        return $this->belongsTo(History::class, 'id_orden');
+    }
 }

@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use App\Models\Order;
 use App\Models\ProductOrder;
 use App\Models\Product;
+use App\Models\History;
 use Carbon\Carbon;
 
 class OrderController extends Controller
@@ -17,7 +18,7 @@ class OrderController extends Controller
     //Metodo index, retorna la pagina principal con las ordenes cargadas
     public function index()
     {
-        $orders= Order::all();
+        $orders= Order::where('estado', 'Pendiente')->get();
 
         $notify_order_created = session()->get('notify_order_created', false);
         $notify_order_updated = session()->get('notify_order_updated', false); //En caso de poder modificarse una orden
@@ -104,5 +105,29 @@ class OrderController extends Controller
         $products = $order->product;
 
         return view('orders.extendOrder', compact('order', 'products'));
+    }
+
+
+    public function transfHistory(Request $request){
+        $id_orden = $request->input('id_orden');
+        $order = Order::find($id_orden);
+        $order->estado = "Listo";
+        $order->save();
+        try{
+            if($order->estado == "Listo"){
+                $histories = new History;
+                $histories->id_orden = $id_orden;
+                $histories->fecha = $request->input('fecha');
+                $histories->cliente = $request->input('cliente');
+                $histories->direccion = $request->input('direccion');
+                $histories->total = $request->input('total');
+                $histories->estado = $order->estado;
+                $histories->user_id = auth()->user()->id;
+                $histories->save();
+                return redirect()->route('history');
+            }
+        }catch(Exception $e){
+            dd($e);
+        }
     }
 }

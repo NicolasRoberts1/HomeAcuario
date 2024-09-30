@@ -89,6 +89,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/history', [
         App\Http\Controllers\HistoryController::class, 'index'
     ])->name('history');
+
+    Route::post('/history/{order}', [
+        App\Http\Controllers\OrderController::class, 'transfHistory'
+    ])->name('orders.transfHistory');
+
 });
 
 require __DIR__.'/auth.php';

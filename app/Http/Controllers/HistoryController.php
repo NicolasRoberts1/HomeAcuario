@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\History;
+use App\Models\Order;
 
 class HistoryController extends Controller
 {
-    //Metodo indez
+    //Metodo index
     public function index(){
-        $history=History::orderBy('created_at', 'DESC');
+        $histories=History::all();
 
         return view('History', [
-            'history' => $history
+            'histories' => $histories
         ]);
     }
 }
