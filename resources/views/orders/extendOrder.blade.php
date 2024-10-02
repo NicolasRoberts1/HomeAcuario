@@ -98,6 +98,9 @@
                     <p>{{$order->total - $order->pre_entrega}}</p>
                 </div>
             </div>
+            <div class="flex justify-center">
+                <a href="{{route('orders')}}" class="font-medium text-lg text-white button cursor-pointer bg-indigo-600 rounded-lg px-4 py-3 text-center hover:bg-indigo-800 ml-5 mt-5 justify-center">Volver</a>
+            </div>
             @endauth
         </div>
     </div>
