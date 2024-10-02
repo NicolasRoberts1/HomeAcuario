@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,8 +41,9 @@ class ProductController extends Controller
             'nombre' => 'required|max:75',
             'descripcion' => 'required|max:150',
             'cantidad' => 'required|integer|min:1',
-            'precio' => 'required|numeric|min:0',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de la imagen
+            'precio_minorista'=> 'required|numeric|min:0',
+            'precio_mayorista'=> 'required|numeric|min:0',
         ]);
 
         // Procesar la imagen si existe
@@ -57,7 +59,8 @@ class ProductController extends Controller
         $new_product->nombre = $request->input('nombre');
         $new_product->descripcion = $request->input('descripcion');
         $new_product->cantidad = $request->input('cantidad');
-        $new_product->precio = $request->input('precio');
+        $new_product->precio_minorista= $request->input('precio_minorista');
+        $new_product->precio_mayorista= $request->input('precio_mayorista');
         $new_product->user_id = auth()->user()->id;
 
         if($new_product->cantidad>0){
@@ -80,34 +83,42 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(Product $product, Request $request){
-
-         // Validar los datos incluyendo el archivo de imagen
-         $request->validate([
+    public function update(Product $product, Request $request)
+    {
+        // Validar los datos incluyendo el archivo de imagen
+        $request->validate([
             'nombre' => 'required|max:75',
             'descripcion' => 'required|max:150',
             'cantidad' => 'required|integer|min:1',
-            'precio' => 'required|numeric|min:0',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de la imagen
+            'precio_minorista' => 'required|numeric|min:0',
+            'precio_mayorista' => 'required|numeric|min:0',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Procesar la imagen si existe
-        $imagen = null;
         if ($request->hasFile('imagen')) {
-            // Guardar la imagen en la carpeta 'public/images' y obtener el nombre del archivo
+            // Guardar la nueva imagen y obtener su ruta
             $imagen = $request->file('imagen')->store('images', 'public');
+            // Eliminar la imagen anterior si existe
+            if ($product->imagen) {
+                Storage::disk('public')->delete($product->imagen);
+            }
+            $product->imagen = $imagen;
         }
 
-        $product->imagen = $imagen;
+        // Actualizar los demás campos
         $product->nombre = $request->input('nombre');
-        $product-> descripcion= $request->input('descripcion');
+        $product->descripcion = $request->input('descripcion');
         $product->cantidad = $request->input('cantidad');
-        $product->precio= $request->input('precio');
-        if ($product->cantidad>0){
-            $product->estado= "En Stock";
-        }else{
-            $product->estado= "No Stock";
+        $product->precio_minorista = $request->input('precio_minorista');
+        $product->precio_mayorista = $request->input('precio_mayorista');
+
+        if ($product->cantidad > 0) {
+            $product->estado = "En Stock";
+        } else {
+            $product->estado = "No Stock";
         }
+
         $product->save();
 
         session()->flash('notify_product_updated', true);

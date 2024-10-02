@@ -15,6 +15,7 @@
                 <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cliente</th>
                 <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Dirección</th>
                 <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Total ($)</th>
+                <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Productos</th>
                 <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                         <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$history->cliente}}</td>
                         <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center break-words">{{$history->direccion}}</td>
                         <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$history->total}}</td>
+                        <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="{{route('orders.extendOrder', ['order'=>$history->id_orden])}}" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
                         <td  class="py-2 px-4 border-b text-sm text-green-400 text-center">{{$history->estado}}</td>
                     </tr>
                     @endforeach

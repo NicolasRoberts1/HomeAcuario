@@ -50,6 +50,7 @@ class OrderController extends Controller
         $order->cliente = $request->input('cliente');
         $order->direccion = $request->input('direccion');
         $order->pago = $request->input('metodo_pago');
+        $order->tipo = $request->input('tipo');
         $order->pre_entrega = $request->input('entrega');
         $order->observacion = $request->input('observaciones');
         $order->user_id = $user_id;
@@ -63,7 +64,12 @@ class OrderController extends Controller
         foreach ($products as $producto_id => $cantidad) {
             if ($cantidad > 0) {
                 $product = Product::find($producto_id);
-                $subtotal = $product->precio * $cantidad;
+                if($order->tipo == 'minorista'){
+                    $subtotal = $product->precio_minorista * $cantidad;
+                }
+                else if($order->tipo == 'mayorista'){
+                    $subtotal = $product->precio_mayorista * $cantidad;
+                }
                 $total += $subtotal;
             }
         }
@@ -89,6 +95,7 @@ class OrderController extends Controller
     }
 
     public function destroy(Order $order){
+
         $order->delete();
 
         session()->flash('notify_order_deleted', true);
@@ -127,7 +134,7 @@ class OrderController extends Controller
                 return redirect()->route('history');
             }
         }catch(Exception $e){
-            dd($e);
+            echo($e);
         }
     }
 }

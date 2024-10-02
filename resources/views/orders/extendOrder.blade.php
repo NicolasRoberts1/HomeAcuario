@@ -30,7 +30,7 @@
                                <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->total}}</td>
                                <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->pre_entrega}}</td>
                                <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->observacion}}</td>
-                               <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center text-orange-400">{{$order->estado}}</td>
+                               <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center text-orange-400" @if($order->estado == 'Listo')class="text-green-400" @endif>{{$order->estado}}</td>
                            </tr>
                        </tbody>
                 </table>
@@ -47,7 +47,7 @@
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">ID Producto</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Imagen</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
-                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio Unitario ($)</th>
+                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio ($)</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cantidad</th>
                     </tr>
                   </thead>
@@ -63,7 +63,14 @@
                             @endif
                             </td>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->nombre}}</td>
-                          <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->precio}}</td>
+                          <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">
+                            @if($order->tipo == 'minorista')
+                                {{$product->precio_minorista}}
+                            @endif
+                            @if($order->tipo == 'mayorista')
+                                {{$product->precio_mayorista}}
+                            @endif
+                        </td>
                           <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->pivot->cantidad}}</td>
                       </tr>
                       @endforeach

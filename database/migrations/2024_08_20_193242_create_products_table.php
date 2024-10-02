@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('imagen');
             $table->string('descripcion', 150);
             $table->integer('cantidad');
-            $table->float('precio', 12, 2);
+            $table->float('precio_minorista', 12, 2);
+            $table->float('precio_mayorista', 12, 2);
             $table->string('estado', 25);
             $table->timestamps();
             $table->unsignedBigInteger('user_id');

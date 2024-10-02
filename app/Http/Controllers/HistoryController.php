@@ -14,10 +14,12 @@ class HistoryController extends Controller
 {
     //Metodo index
     public function index(){
-        $histories=History::all();
+        $histories=History::orderBy('created_at', 'desc')->get();
+        $orders= Order::where('estado', 'Listo')->get();
 
         return view('History', [
-            'histories' => $histories
+            'histories' => $histories,
+            'orders' => $orders
         ]);
     }
 }

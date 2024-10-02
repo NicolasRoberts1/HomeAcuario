@@ -11,8 +11,20 @@
                             {{ __('Editar producto') }}
                         </h2>
                         <hr class="mt-5 mb-5">
-                        <label for="imagen" class="w-1/2 font-medium text-lg text-gray-600">Imagen:</label>
-                        <input type="file" name="imagen" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2 mb-2">
+                        <div class="flex justify-between">
+                            @if ($product->imagen)
+                            <div class="mt-4 flex-col w-1/2 items-center">
+                                <label for="current_image" class="w-1/2 font-medium text-lg text-gray-600">Imagen Actual:</label>
+                                <img src="{{ asset('storage/' . $product->imagen) }}" alt="Imagen del producto" class="mt-2 mb-2" style="width: 80px;">
+                            </div>
+                            @endif
+                            <div class="mt-4 flex-col">
+                                <label for="imagen" class="w-1/2 font-medium text-lg text-gray-600">Cambiar Imagen (opcional):</label>
+                                <input type="file" name="imagen" class="font-medium text-lg text-gray-600 border-gray-600 mt-2 mb-2">
+                            </div>
+
+                        </div>
+
                         <label for="nombre" class="w-1/2 font-medium text-lg text-gray-600">Nombre:</label>
                         <input type="text" name="nombre" value="{{$product->nombre}}" max="75" required class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
                         <label for="descripcion" class="mt-5 font-medium text-lg text-gray-600">Descripción:</label>
@@ -23,9 +35,14 @@
                         <div class="mt-5 font-medium text-lg text-gray-600 flex justify-between items-center text-center">
                             <label for="cantidad" class="font-medium text-lg text-gray-600">Cantidad:</label>
                             <input type="number" name="cantidad" value="{{$product->cantidad}}" required class="w-1/6 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
-                            <label for="precio" class="font-medium text-lg text-gray-600">Precio Unitario ($):</label>
-                            <input type=number name="precio" step="0.01" value="{{$product->precio}}" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
+                            <label for="precio_minorista" class="font-medium text-lg text-gray-600">Precio Minorista ($):</label>
+                            <input type=number name="precio_minorista" step="0.01" value="{{$product->precio_minorista}}" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
                         </div>
+                        <div class="mt-5 font-medium text-lg text-gray-600 flex justify-end items-center text-center">
+                            <label for="precio_mayorista" class="font-medium text-lg text-gray-600">Precio Mayorista ($):</label>
+                            <input type=number name="precio_mayorista" step="0.01" value="{{$product->precio_mayorista}}" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600 ml-4">
+                        </div>
+
 
                         <div class="mt-7 flex justify-end items-center">
                             <a href="{{route('products')}}" class=" font-medium text-lg text-gray-600">Cancelar</a>

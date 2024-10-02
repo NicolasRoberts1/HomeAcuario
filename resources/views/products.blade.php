@@ -39,7 +39,7 @@
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Descripción</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Cantidad</th>
-                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio unitario ($)</th>
+                                  <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio ($) Mi | Ma</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha Agregado</th>
                                   <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Fecha modificado</th>
@@ -56,15 +56,15 @@
                                             @else
                                                 No image
                                             @endif
-                                        </td>
+                                            </td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->nombre}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center break-words">{{$product->descripcion}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->cantidad}}</td>
-                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->precio}}</td>
+                                           <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->precio_minorista}} | <b>{{$product->precio_mayorista}}</b></td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->estado}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->created_at}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$product->updated_at}}</td>
-                                           <td class="flex py-2 justify-between py-2 px-4 border-b text-sm text-gray-700 text-center">
+                                           <td class="flex py-4 justify-between px-4 border-b text-sm text-gray-700 text-center mt-5">
                                                <a href="{{ route('products.edit', ['product' => $product->id]) }}"><img src="{{ asset('images/edit-icon.ico') }}" alt="Editar" style="width:28px"></a>
                                                <button type="button" onclick="openModal('{{ $product->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
                                            </td>

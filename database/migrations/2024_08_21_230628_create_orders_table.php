@@ -16,8 +16,8 @@ return new class extends Migration
             $table->datetime('fecha');
             $table->string('cliente', 75);
             $table->string('direccion');
-            $table->string('pago', 15); //Estado Efectivo/transferencia
-
+            $table->string('pago', 15); //Estado Efectivo/transferencia/indefinido
+            $table->string('tipo', 15); //Mayorista/Minorista
             $table->float('total', 12, 2);
             $table->float('pre_entrega', 12, 2);
             $table->string('observacion', 200);

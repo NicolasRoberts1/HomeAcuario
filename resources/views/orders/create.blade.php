@@ -29,13 +29,26 @@
                                 <div>
                                     <input type="radio" name="metodo_pago" value="transferencia" required> Transferencia
                                 </div>
+                                <div>
+                                    <input type="radio" name="metodo_pago" value="indefinido" required> Indefinido
+                                </div>
+                            </div>
+
+                            <label class="mt-5 font-medium text-lg text-gray-600">Tipo de pedido</label>
+                            <div class="flex items-center justify-around font-medium text-lg text-gray-600 mt-2">
+                                <div>
+                                    <input type="radio" name="tipo" value="minorista" required> Minorista
+                                </div>
+                                <div>
+                                    <input type="radio" name="tipo" value="mayorista" required> Mayorista
+                                </div>
                             </div>
 
                             <label class="mt-5 font-medium text-lg text-gray-600">Entrega ($)</label>
                             <input type="number" name="entrega" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
 
                             <label class="mt-5 font-medium text-lg text-gray-600">Observaciones</label>
-                            <textarea name="observaciones" id="observacion" cols="30" rows="5" maxlength="150" oninput="updateCounter()" placeholder="Observaciones del pedido..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2 resize-none"></textarea>
+                            <textarea name="observaciones" id="observacion" cols="30" rows="5" maxlength="150" oninput="updateCounter()" placeholder="Observaciones del pedido..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2 resize-none" required></textarea>
                             <div class="char-counter">
                                 <span id="charCount">0</span>/150 caracteres
                             </div> {{--Contador de caracteres del textarea--}}
@@ -56,7 +69,7 @@
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Imagen</th>
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Nombre</th>
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Descripción</th>
-                                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio unitario ($)</th>
+                                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Precio ($) MI|MA</th>
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
                                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Acción</th>
                                     </tr>
@@ -74,7 +87,7 @@
                                                 </td>
                                                 <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{ $product->nombre }}</td>
                                                 <td class="py-2 px-4 border-b text-sm text-gray-700 text-center break-words">{{ $product->descripcion }}</td>
-                                                <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{ $product->precio }}</td>
+                                                <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{ $product->precio_minorista}} | <b>{{ $product->precio_mayorista}}</b></td>
                                                 <td class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{ $product->estado }}</td>
                                                 <td class="py-2 px-1 border-b text-sm text-gray-700 text-center items-center">
                                                     <button type="button" class="w-5 h-5 text-center py-0.5" onclick="updateQuantity({{ $product->id }}, -1)">

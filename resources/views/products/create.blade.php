@@ -14,15 +14,20 @@
                         <label for="nombre" class="w-1/2 font-medium text-lg text-gray-600">Nombre:</label>
                         <input type="text" name="nombre" placeholder="Nombre del producto..." max="75" required class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
                         <label for="descripcion" class="mt-5 font-medium text-lg text-gray-600">Descripción:</label>
-                        <textarea name="descripcion" id="descripcion" cols="30" rows="5" maxlength="150" oninput="updateCounter()" placeholder="Descripcion del producto..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2" style="resize:none;"></textarea>
+                        <textarea name="descripcion" id="descripcion" cols="30" rows="5" maxlength="150" oninput="updateCounter()" placeholder="Descripcion del producto..." class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2" style="resize:none;" required></textarea>
                         <div class="char-counter">
                             <span id="charCount">0</span>/150 caracteres
                         </div> {{--Contador de caracteres del textarea--}}
                         <div class="mt-5 font-medium text-lg text-gray-600 flex justify-between items-center text-center">
                             <label for="cantidad" class="font-medium text-lg text-gray-600">Cantidad:</label>
                             <input type="number" name="cantidad" value="1" required class="w-1/6 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
-                            <label for="precio" class="font-medium text-lg text-gray-600">Precio Unitario ($):</label>
-                            <input type=number name="precio" step="0.01" placeholder="0.00" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
+
+                            <label for="precio_minorista" class="font-medium text-lg text-gray-600">Precio Minorista ($):</label>
+                            <input type=number name="precio_minorista" step="0.01" placeholder="0.00" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600">
+                        </div>
+                        <div class="mt-5 font-medium text-lg text-gray-600 flex justify-end items-center text-center">
+                            <label for="precio_mayorista" class="font-medium text-lg text-gray-600">Precio Mayorista ($):</label>
+                            <input type=number name="precio_mayorista" step="0.01" placeholder="0.00" required class="w-1/3 font-medium text-lg text-gray-600 rounded-3xl border-gray-600 ml-4">
                         </div>
 
                         <div class="mt-7 flex justify-end items-center">
