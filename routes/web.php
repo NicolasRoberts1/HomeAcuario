@@ -55,6 +55,11 @@ Route::middleware('auth')->group(function () {
         App\Http\Controllers\OrderController::class, 'extendOrder'
     ])->name('orders.extendOrder');
 
+    Route::get('/orders/printPDF/{order}', [
+        App\Http\Controllers\OrderController::class, 'printPDF'
+    ])->name('orders.printPDF');
+
+
 
     //==================PRODUCTS======================
     //Ruta que redirige a la vista products

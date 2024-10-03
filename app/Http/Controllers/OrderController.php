@@ -12,6 +12,7 @@ use App\Models\ProductOrder;
 use App\Models\Product;
 use App\Models\History;
 use Carbon\Carbon;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -112,6 +113,14 @@ class OrderController extends Controller
         $products = $order->product;
 
         return view('orders.extendOrder', compact('order', 'products'));
+    }
+
+    public function printPDF(Order $order){
+        $products=$order->product;
+
+        $pdf = PDF::loadView('orders.printPDF', compact('order', 'products'));
+
+        return $pdf->stream();
     }
 
 

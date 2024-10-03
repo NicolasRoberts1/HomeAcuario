@@ -73,6 +73,7 @@
                                                         <img src="{{asset('images/check-icon.ico')}}" alt="Listo" style="width: 20px;">
                                                     </button>
                                             </form>
+                                            <a href="{{route('orders.printPDF', ['order'=>$order->id])}}"><img src="{{asset('images/printBTN.ico')}}" alt="Imprimir" style="width: 20px;"></a>
                                            </td>
                                        </tr>
 
