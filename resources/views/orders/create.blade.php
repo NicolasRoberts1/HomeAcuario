@@ -2,10 +2,10 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- <div class="max-w-5xl mx-auto sm:px-5 lg:px-5 p-5 flex flex-col"> --}}
-                    <form action="{{ route('orders.store') }}" method="POST">
+                    <form action="{{ route('orders.store') }}" method="POST" id="createForm">
                         @csrf
-                        <div class="flex flex-col md:flex-row justify-center gap-16">
-                            <div class="flex flex-col bg-white w-5/12 py-10 px-10 rounded-xl font-sans">
+                        <div class="flex flex-col md:flex-row gap-16" id="createOContOne">
+                            <div class="flex flex-col bg-white md:w-5/12 w-8/12 mx-auto md:mx-0 py-10 px-10 rounded-xl font-sans" id="createOContTwo">
 
                             <!-- Formulario de pedido -->
 
@@ -22,7 +22,7 @@
                             <input type="text" name="direccion" class="font-medium text-lg text-gray-600 rounded-3xl border-gray-600 mt-2">
 
                             <label class="mt-5 font-medium text-lg text-gray-600">Método de Pago</label>
-                            <div class="flex items-center justify-around font-medium text-lg text-gray-600 mt-2">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-around font-medium text-lg text-gray-600 mt-2">
                                 <div>
                                     <input type="radio" name="metodo_pago" value="efectivo" required> Efectivo
                                 </div>
@@ -54,7 +54,7 @@
                             </div> {{--Contador de caracteres del textarea--}}
                         </div>
 
-                        <div class="flex flex-col flex-wrap w-1/2">
+                        <div class="flex flex-col flex-wrap w-8/12 mx-auto md:mx-none md:w-1/2">
                             <!-- Selección de productos -->
                             <div class="flex flex-col  mb-8">
                                 <label class="mt-5 font-medium text-lg text-gray-600">Seleccionar productos</label>

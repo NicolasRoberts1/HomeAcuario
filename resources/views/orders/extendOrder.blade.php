@@ -15,7 +15,7 @@
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Dirección</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Pago</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Total ($)</th>
-                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Pre entrega</th>
+                      <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Entrega</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Observación</th>
                       <th class="py-2 px-4 border-b text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">Estado</th>
                     </tr>
@@ -81,7 +81,7 @@
             <div class="flex mb-4 mt-8 px-2 justify-center gap-16">
                 <div class="flex items-center gap-3">
                     <h3 class="text-black font-bold text-xl">
-                        Pre Entrega:
+                        Entrega:
                     </h3>
                     <p>{{$order->pre_entrega}}</p>
                 </div>
