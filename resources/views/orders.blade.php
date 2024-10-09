@@ -59,8 +59,8 @@
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center">{{$order->observacion}}</td>
                                            <td  class="py-2 px-4 border-b text-sm text-gray-700 text-center text-orange-400">{{$order->estado}}</td>
                                            <td class="py-2 px-4 border-b text-sm text-gray-700 text-center"><a href="{{route('orders.extendOrder', ['order'=>$order->id])}}" class="flex justify-center"><img src="{{asset('images/blue-plus.ico')}}" alt="Ver productos" style="width: 20px;"></a></td>
-                                           <td class="flex py-8 justify-between px-2 border-b text-sm text-gray-700 text-center md:py-2 md:px-4">
-                                               <button type="button" onclick="openModal('{{ $order->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px;"></button>
+                                           <td class="flex py-8 justify-between border-b text-sm text-gray-700 items-center text-center lg:px-2">
+                                               <button type="button" onclick="openModal('{{ $order->id }}')"><img src="{{asset('images/bassurero.ico')}}" alt="Eliminar" style="width: 20px; height:20px; object-fit:contain"></button>
                                                <form action="{{route('orders.transfHistory', ['order'=>$order->id])}}" method="POST" style="display:inline;">
                                                     @csrf
                                                     <input type="hidden" name="id_orden" value="{{$order->id}}">
@@ -70,10 +70,10 @@
                                                     <input type="hidden" name="total" value="{{$order->total}}">
                                                     <input type="hidden" name="estado" value="{{$order->estado}}">
                                                     <button type="submit" style="background: none; border: none; cursor: pointer;">
-                                                        <img src="{{asset('images/check-icon.ico')}}" alt="Listo" style="width: 20px;">
+                                                        <img src="{{asset('images/check-icon.ico')}}" alt="Listo" style="width: 20px; height:20px;">
                                                     </button>
                                             </form>
-                                            <a href="{{route('orders.printPDF', ['order'=>$order->id])}}"><img src="{{asset('images/printBTN.ico')}}" alt="Imprimir" style="width: 20px;"></a>
+                                            <a href="{{route('orders.printPDF', ['order'=>$order->id])}}"><img src="{{asset('images/printBTN.ico')}}" alt="Imprimir" style="width: 20px; height:20px;"></a>
                                            </td>
                                        </tr>
 
