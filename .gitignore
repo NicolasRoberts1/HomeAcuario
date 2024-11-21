@@ -17,3 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/database/migrations/2024_10_02_113708_add_default_users.php
